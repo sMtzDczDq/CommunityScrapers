@@ -54,6 +54,9 @@ def scrape_file(path):
     if artist := metadata_insensitive.get("artist"):
         scene["performers"] = [{"name": artist}]
         scene["studio"] = {"name": artist}
+    
+    if keywords := metadata_insensitive.get("keywords"):
+        scene["tags"] = [{"name": tag} for tag in str(keywords).split(",")]
 
     return scene
 
