@@ -1,0 +1,55 @@
+name: MVG
+# scrapes: AMARaw, Black Cock Passion, Go Gay Guy, I Luv Milfs, I Luv Teens, Italian Hot Club, Lesbian Tribe, My Slut Wife Goes Black, O Black Girls, O Blowjobs, Porn Land Videos, Solo Girls Mania, Up Shemale, Vangoren
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - amaraw.com
+      - blackcockpassion.com
+      - gogayguy.com
+      - iluvmilfs.com
+      - iluvteens.com
+      - italianshotclub.com
+      - lesbiantribe.com
+      - myslutwifegoesblack.com
+      - oblackgirls.com
+      - oblowjobs.com
+      - pornlandvideos.com
+      - sologirlsmania.com
+      - upshemale.com
+      - vangoren.com
+    scraper: sceneScraper
+xPathScrapers:
+  sceneScraper:
+    scene:
+      Title: //h1
+      Date:
+        selector: //span[@class='date']
+        postProcess:
+          - parseDate: 2-January-2006
+      Performers:
+        Name: //div[@class="starring"]//a
+      Tags:
+        Name: //div[contains(@class,'genres') or contains(@class,'tags')]//a | //span[i[contains(@class,'fa-tag')]]/a
+      Details: //div[@class='description']//p
+      URLs: //link[@rel="canonical"]/@href
+      Image: //meta[@property="og:image"]/@content
+      Studio:
+        Name:
+          selector: //title
+          postProcess:
+            - replace:
+                - regex: .+\|([^\|]+?)(\.com)?$
+                  with: $1
+                - regex: "([a-z])([A-Z])"
+                  with: $1 $2
+            - map:
+                AMARAW: AMARaw
+                BLACKCOCKPASSION: Black Cock Passion
+                Gogayguy: Go Gay Guy
+                ILUVMILFS: I Luv Milfs
+                Iluvteens: I Luv Teens
+                italianshotclub: Italian Hot Club
+                oblackgirls: O Black Girls
+                oblowjobs: O Blowjobs
+                Pornlandvideos: Porn Land Videos
+                Upshemale: Up Shemale

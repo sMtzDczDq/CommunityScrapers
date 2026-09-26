@@ -1,34 +1,48 @@
 name: Aziani
 sceneByURL:
-  - action: scrapeXPath
+  - action: scrapeJson
     url:
       - aziani.com/video/
+    queryURL: https://azianistudios.com/tour_api.php/content/sets?cms_set_ids={url}&cms_block_id=138224&data_types=1
+    queryURLReplace:
+      url:
+        - regex: .+/video/([^/?#]+).*
+          with: $1
     scraper: sceneScraper
-xPathScrapers:
+jsonScrapers:
   sceneScraper:
     scene:
-      Studio:
-        Name: //dd/a[contains(@href,"/series/")]
-      Performers:
-        Name: //dd/a[contains(@href,"models")]
-      Title: //nats-content-view-header-row//h3
-      Details: //nats-content-view-details-row//div[contains(@class,"description")]
-      Tags:
-        Name: //dd/a[contains(@href, "/tag/") or contains(@href, "/category/")]
-      Image:
-        selector: //nats-video-player//img/@srcset | //nats-video-player//img/@src
+      Title:
+        selector: sets.0.name
         postProcess:
           - replace:
-              - regex: ^.+https://(\S+).+$
-                with: https://$1
-      Date:
-        selector: //dd[contains(@class,"date")]
+              - regex: \s+
+                with: " "
+      Details: sets.0.description
+      Date: sets.0.added_nice
+      Image:
+        selector: sets.0.preview_formatted.thumb.1920-1080.0.[fileuri,signature].@tostr
         postProcess:
-          - parseDate: Jan 2, 2006
-
+          - replace:
+              - regex: ^\["(.*)","(.*)"\]$
+                with: $1?$2
+              # gjson's @tostr re-serializes the array without unescaping the
+              # forward slashes it JSON-escaped, so fileuri comes through as
+              # "\/path\/to\/file" instead of "/path/to/file"
+              - regex: \\/
+                with: /
+              - regex: ^
+                with: https://c75c0c3063.mjedge.net
+      Tags:
+        Name: sets.0.data_types.#(shortname=="tags").data_values.#.name
+      Performers:
+        Name: sets.0.data_types.#(shortname=="models").data_values.#.name
+      Studio:
+        Name:
+          fixed: Aziani
 driver:
-  useCDP: true
   headers:
-    - Key: User-Agent
-      Value: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0)
-# Last Updated June 08, 2025
+    - Key: X-NATS-cms-area-id
+      Value: 3b4c609c-6a0d-4cb9-9cce-0605f32b79ec
+    - Key: X-nats-entity-decode
+      Value: "1"

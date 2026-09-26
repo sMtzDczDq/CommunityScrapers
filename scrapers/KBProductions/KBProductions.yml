@@ -1,5 +1,6 @@
 name: KB Productions
 # requires: py_common
+# scrapes: 2 Girls 1 Camera, AD4X, All Anal, Alt Erotic, Amazing Films, Anal Jesse, Anal Only, BJ Raw, Beddable Boys, Bemefi, Benefit Monkey, Best Bareback, Big Gulp Girls, Black Bull Challenge, Bopping Babes, Cannon Productions, Collective Corruption, Come Inside, CosplayXGirls, Cougar Season, Creampie Thais, Darkshade, Deepthroat Sirens, DickHDDaily, Dire Desires, Dirty Auditions, Divine-DD, DoggVision, Downblouse Jerk, DripDrip, Edward James, Emo Twinks, Exposed Emos, Facials Forever, FantasyPOV, FreakMob Hardcore, FreakMob Media, GoGo World Porn, Gogo Bar Auditions, Got Filled, HardWerk, Hoby Buchanon, Homo Emo, Homo Scene, Inked POV, Inserted, JAV888, JavHub, Jizz Addiction, Joe Schmoe Videos, La BellaDX, Lady Sonia, Legendary X, LezKey, Lil D's Playhouse, Lingerie Tales, Lollipop Twinks, LucidFlix, Luke CooperX, Macho Factory, MadBros, MariskaX, Mean Feet Fetish, Milflicious, NYSeed, Nasty Daddy, Nick Marxx, Nikki Zee, Nylon Perv, Nympho, POV Perv, PassionPOV, Pervect, Pounded Petite, PurgatoryX, QueerCrush, Real Bikini Girls, Red-XXX, Ricky's Room, S3XUS, SIDECHICK, Seska, Severe Sex Films, SexTapes, Sexy Modern Bull, She's Brand New, SheHerGirls, Suck This Dick, Swallowed, TWM Classics, TWM Interviews, The ArtemiXXX, Top Web Models, ToughLoveX, Trashy Never Classy, True Anal, Twink Light, Upskirt Jerk, VRHush, Wank It Now, XXX Tryout, Xful, Yes Girlz, Yummy Couple, Z-Filmz
 sceneByURL:
   - action: scrapeXPath
     url:
@@ -8,6 +9,8 @@ sceneByURL:
     scraper: sceneScraper
   - url:
       - 2girls1camera.com/scenes
+      - ad4x.com/videos
+      - ad4x.com/en/videos
       - alterotic.com/videos
       - amazingfilms.com/videos
       - analjesse.com/trailers
@@ -17,8 +20,11 @@ sceneByURL:
       - biggulpgirls.com/scenes
       - bjraw.com/videos
       - blackbullchallenge.com/videos
+      - boppingbabes.com/videos
       - cannonprod.com/videos
+      - collectivecorruption.com/videos
       - comeinside.com/videos
+      - cosplayxgirls.com/videos
       - cougarseason.com/scenes
       - creampiethais.com/videos
       - darkshade.com/videos
@@ -29,9 +35,12 @@ sceneByURL:
       - dirtyauditions.com/scenes
       - divine-dd.com/videos
       - doggvision.com/videos
+      - downblousejerk.com/videos
       - dripdropprod.net/scenes
+      - edwardjames.com/videos
       - facialsforever.com/scenes
       - fantasypov.com/videos
+      - freakmobhardcore.com/videos
       - freakmobmedia.com/videos
       - gogobarauditions.com/trailers
       - gogoworldporn.com/videos
@@ -44,6 +53,7 @@ sceneByURL:
       - inserted.com/tour/videos
       - inserted.com/videos
       - jav888.com/videos
+      - tour.javhub.com/videos
       - jizzaddiction.com/scenes
       - joeschmoevideos.com/scenes
       - johnnyrapid.com/videos
@@ -52,28 +62,36 @@ sceneByURL:
       - legendaryx.com/videos
       - lildsplayhouse.com/videos
       - lezkey.com/scenes
+      - lingerietales.com/videos
       - lucidflix.com/episodes
       - lukecooperx.com/videos
       - machofactory.com/scenes
+      - madbrosx.com/video
+      - mariskax.com/scenes
+      - mariskax.com/view/
       - meanfeetfetish.com/videos
       - milflicious.com/videos
-      - mongerinasia.com/trailers
+      - nastydaddy.com
       - nickmarxx.com/videos
       - nikkizee.com/scenes
       - nylonperv.com/videos
       - nyseedxxx.com/video
       - passionpov.com/videos/
       - pervect.com/scenes
+      - purgatoryx.com/episodes
+      - purgatoryx.com/view
       - queercrush.com/videos
+      - realbikinigirls.com/videos
       - red-xxx.com/scenes
       - rickysroom.com/videos
       - rickysroom.com/bts
       - s3xus.com/scenes
-      - sextapes.com/videos
+      - severesexfilms.com/videos
+      - /sextapes.com/videos
+      - www.sextapes.com/videos
       - sexymodernbull.com/videos
       - shehergirls.com/videos
       - sidechick.com/videos
-      - thaigirlswild.com/videos
       - theartemixxx.com/videos
       - tour.allanal.com/scenes
       - tour.nympho.com/scenes
@@ -83,9 +101,15 @@ sceneByURL:
       - tour.shesbrandnew.com/scenes
       - tour.swallowed.com/scenes
       - tour.topwebmodels.com/scenes
+      - toughlovex.com/videos
+      - toughlovex.com/view
+      - trashyneverclassy.com/videos
       - trueanal.com/scenes
+      - upskirtjerk.com/videos
       - vrhush.com/scenes
+      - wankitnow.com/videos
       - xful.com/videos
+      - xxxtryout.com/videos
       - yesgirlz.com/scenes
       - yummycouple.com/videos
       - z-filmz-originals.com/videos
@@ -105,14 +129,19 @@ performerByURL:
       - biggulpgirls.com/models
       - bjraw.com/models
       - blackbullchallenge.com/models
+      - boppingbabes.com/models
+      - cosplayxgirls.com/characters
       - comeinside.com/models
       - cougarseason.com/models
       # creampiethais.com has no model pages
       - deepthroatsirens.com/models
       - dirtyauditions.com/models
       - divine-dd.com/models
+      - downblousejerk.com/models
+      - edwardjames.com/models
       - facialsforever.com/models
       - fantasypov.com/models
+      - freakmobhardcore.com/models
       - freakmobmedia.com/models
       - gogoworldporn.com/models
       - gotfilled.com/models
@@ -127,21 +156,26 @@ performerByURL:
       - inserted.com/models
       - inserted.com/tour/models
       - jav888.com/models
+      - tour.javhub.com/models
       - labelladx.com/model
       # lady-sonia.com has no model pages
       - lezkey.com/models
+      - lingerietales.com/models
       - lucidflix.com/models
       - machofactory.com/models
+      - mariskax.com/models
       - meanfeetfetish.com/models
       - milflicious.com/models
       - nickmarxx.com/models
       - nikkizee.com/models
       - nylonperv.com/models
+      - passionpov.com/models
       - pervect.com/models
       - tour.nympho.com/models
       - tour.poundedpetite.com/models
       # tour.povperv.com has no model pages
       # red-xxx.com has no model pages
+      - realbikinigirls.com/models
       - rickysroom.com/models
       - s3xus.com/models
       # seska.com has no model pages
@@ -151,9 +185,13 @@ performerByURL:
       - sexymodernbull.com/models
       - tour.swallowed.com/models
       - tour.topwebmodels.com/models
+      - trashyneverclassy.com/models
       - trueanal.com/models
+      - upskirtjerk.com/models
       - vrhush.com/models
+      - wankitnow.com/models
       - xful.com/models
+      - xxxtryout.com/performers
       - yesgirlz.com/models
       # yummycouple.com has no model pages
       - z-filmz-originals.com/models
@@ -166,7 +204,13 @@ performerByURL:
 xPathScrapers:
   sceneScraper:
     scene:
-      Title: //div[@class="trailer"]//img/@alt
+      Title:
+        # the trailer image no longer carries the title; the h1 is "<date> - <title>"
+        selector: //div[@class="trailer"]//img[@alt != ""]/@alt | //h1/text()[1]
+        postProcess:
+          - replace:
+              - regex: ^[A-Z][a-z]+\s+\d{1,2},\s+\d{4}\s+-\s+
+                with: ""
       Details: //div[@class="videoContainer"]//p[not(contains(@class,'vjs-no-js'))]/text()
       Performers:
         Name: //h2[contains(text(),'Models')]/a/text()
@@ -177,7 +221,7 @@ xPathScrapers:
               - regex: ^(https:)?
                 with: "https:"
       Date:
-        selector: //h1
+        selector: //h1/text()[1]
         postProcess:
           - replace:
               - regex: ^([^-]+).+
@@ -199,4 +243,3 @@ xPathScrapers:
                 HomoScene: "Homo Scene"
                 LollipopTwinks: "Lollipop Twinks"
                 Twinklight: "Twink Light"
-# Last Updated December 24, 2025

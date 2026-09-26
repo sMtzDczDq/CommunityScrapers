@@ -1,0 +1,131 @@
+name: PaysiteManager
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - atlguy2tie.com
+      - antonproductions.com
+      - authorityangels.com
+      - bastinadoalternatives.com
+      - bondagemischief.com
+      - boundinblissfp.com
+      - boundhotties.com
+      - chicanafetish.com
+      - damselfactory.com
+      - dildopantvideos.info
+      - dpstonefetarchives.com
+      - ebonwolf.com
+      - feetexposed.com
+      - fetishpros.com
+      - fettishvids.com
+      - floridabound.us
+      - gaggedgirlsvideos.com
+      - hollyrope.com
+      - hellfirebunnies.com
+      - hunterslairbondage.com
+      - impactstudiosbondage.com
+      - ineedvioletclips.com
+      - isimovideo.com
+      - lilmissy.uk
+      - lvgvideostore.com
+      - nabher.com
+      - onebarprison.com
+      - naughtyties.com
+      - phoenixstacy.com
+      - rachaelbelle.com
+      - respectfulbondage.com
+      - ropexpert.com
+      - ropexpertvideos.com
+      - shbvisions.com
+      - shinybound.com
+      - shinysboundsluts.com
+      - summerisbound.com
+      - switchkitchen.tv
+      - terrastemptations.com
+      - tickleclip.com
+      - tiedcuffed.com
+      - tiedtalesbondage.com
+      - tinyguyclips.com
+      - thesensitivespot.com
+      - txfetishlegends.com
+    scraper: sceneScraper
+
+xPathScrapers:
+  sceneScraper:
+    scene:
+      Title: //h1
+      Details:
+        selector: //div[contains(@class, "videoDescription")]/p
+        concat: "\n"
+      Date:
+        selector: //div[@class="contentT"]/ul[@class="contentInfo"]/li[./i[contains(@class, "fa-calendar")]]
+        postProcess:
+          - parseDate: Jan 2, 2006
+      Tags:
+        Name:
+          selector: //div[@class="tags"]//a
+          postProcess:
+            - replace:
+                - regex: "^#"
+                  with: ""
+      Performers:
+        Name: //div[@class="models"]//a
+      URLs: //meta[@property="og:url"]/@content
+      Studio:
+        Name:
+          selector: //div[@class="logo"]/a/@href
+          postProcess:
+            - replace:
+                - regex: https://([^.]+)\..+
+                  with: $1
+            - map:
+                atlguy2tie: Alt Guy 2 Tie
+                antonproductions: Anton Productions
+                authorityangels: Authority Angels
+                bastinadoalternatives: Bastinado Alternatives
+                bondagemischief: Bondage Mischief
+                boundhotties: Bound Hotties
+                boundinblissfp: Bound In Bliss
+                chicanafetish: Chicana Fetish
+                damselfactory: Damsel Factory
+                dildopantvideos: Dildo Pant Videos
+                dpstonefetarchives: Stone Fetish
+                ebonwolf: Ebon Wolf
+                feetexposed: Feet Exposed
+                fetishpros: Fetish Pros
+                fettishvids: FettishVids
+                floridabound: Florida Bound
+                gaggedgirlsvideos: Gagged Girls
+                hellfirebunnies: Hellfire Bunnies
+                hollyrope: Hollyrope
+                hunterslairbondage: Hunter's Lair
+                impactstudiosbondage: Impact Studios Bondage
+                ineedvioletclips: I Need Violet
+                isimovideo: Isimo Video
+                lilmissy: Lil Missy UK
+                lvgvideostore: La Vore Girl
+                nabher: Nabher
+                naughtyties: Naughty Ties
+                onebarprison: OneBarPrison
+                phoenixstacy: Phoenix Stacy
+                rachaelbelle: Rachael Belle
+                respectfulbondage: Respectful Bondage
+                ropexpert: RopExpert
+                ropexpertvideos: RopExpert
+                shbvisions: SHB Visions
+                shinysboundsluts: ShinysBoundSluTS
+                shinybound: ShinyBound
+                summerisbound: Summer is Bound
+                switchkitchen: Switch Kitchen
+                terrastemptations: Terra's Temptations
+                tickleclip: Tickleclip
+                tiedcuffed: TiedCuffed
+                tiedtalesbondage: Tied Tales
+                tinyguyclips: Tiny Guy Clips
+                thesensitivespot: The Sensitive Spot
+                txfetishlegends: Tx Fetish Legends
+      Image:
+        selector: //meta[@name="twitter:image"]/@content | //iframe/@src | //div[contains(@class, "videoPreview")]//img/@src
+        postProcess:
+          - replace:
+              - regex: .*\?poster=(.*\.jpg).*
+                with: $1

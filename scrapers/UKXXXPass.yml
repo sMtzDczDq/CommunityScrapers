@@ -1,0 +1,43 @@
+name: ukxxxpass
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - ukxxxpass.xxx/
+      - splatbukkake.xxx/
+      - ukpornparty.xxx/
+      - sexyukpornstars.xxx/
+      - akalexromero.com/
+    scraper: sceneScraper
+xPathScrapers:
+  sceneScraper:
+    common:
+      $movieMeta: //div[contains(@class, "movieMeta")]
+    scene:
+      Title: //div[contains(@class, "movieTitle")]
+      Details:
+        selector: $movieMeta/div[1]/text()
+        postProcess:
+          - replace:
+              - regex: ^[\s,]*$
+                with: ""
+      URLs: //link[@rel="canonical"]/@href
+      Studio:
+        Name: $movieMeta//a[contains(@href, "/movies/studio/")]
+      Date:
+        selector: $movieMeta//div[contains(., "Released on:")]
+        postProcess:
+          - replace:
+              - regex: .+(\d{2}-\d{2}-\d{4}).*
+                with: $1
+          - parseDate: 02-01-2006
+      Performers:
+        Name: $movieMeta//a[contains(@href, "/model/")]
+      Image:
+        selector: //link[@rel="canonical"]/@href|//div[contains(@class, "movieDetailContent")]//img/@src
+        concat: "|"
+        postProcess:
+          - replace:
+              - regex: https?:\/\/?([^\/|]+)[^|]*\|(.+)
+                with: https://${1}${2}
+      Tags:
+        Name: $movieMeta//a[contains(@href, "/category/")]

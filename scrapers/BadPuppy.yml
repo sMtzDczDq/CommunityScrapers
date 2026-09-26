@@ -1,51 +1,45 @@
-name: "BadPuppy"
+name: BadPuppy
 sceneByURL:
-  - action: scrapeXPath
+  - action: scrapeJson
     url:
-      - badpuppy.com
-      - clubamateurusa.com
+      - badpuppy.com/video/
+    queryURL: https://nats.puppycash.com/tour_api.php/content/sets?slug={url}&cms_block_id=100354&data_types=1
+    queryURLReplace:
+      url:
+        - regex: .+/video/([^/?#]+).*
+          with: $1
     scraper: sceneScraper
-xPathScrapers:
+jsonScrapers:
   sceneScraper:
     scene:
       Title:
-        selector: //div/h3
-      Details:
-        selector: //td[@colspan="2"]
-      Performers:
-        Name:
-          selector: //td[@class="ten" and not(a[contains(@href,"categories")])]
-          postProcess:
-            - replace:
-              - regex: \([^)]+\)
-                with: ""
+        selector: sets.0.name
+        postProcess:
+          - replace:
               - regex: \s+
                 with: " "
-          split: ','
+      Details: sets.0.description
+      Date: sets.0.added_nice
       Image:
-        selector: //base/@href | //script[contains(.,"image:")]
-        concat: "__SEP__"
+        selector: sets.0.preview_formatted.thumb.@values|@reverse.0.0.[fileuri,signature].@tostr
         postProcess:
           - replace:
-              - regex: ^(.+)?__SEP__.+image:"([^"]+)?.+$
-                with: $1/$2
-      Date:
-        selector: //td/b[contains(text(),"Added")]
-        postProcess:
-          - replace:
-              - regex: ^Added:\s*
-                with: ""
-          - parseDate: Jan 2, 2006
+              - regex: ^\["(.*)","(.*)"\]$
+                with: $1?$2
+              - regex: \\/
+                with: /
+              - regex: ^
+                with: https://c8748e7fc4.mjedge.net
       Tags:
-        Name: //a[@class="model_category_link" and contains(@href,"categories")]
+        Name: sets.0.data_types.#(shortname=="tags").data_values.#.name
+      Performers:
+        Name: sets.0.data_types.#(shortname=="models").data_values.#.name
       Studio:
         Name:
-          selector: //base/@href
-          postProcess:
-            - replace:
-                - regex: ^.+?\.([^\.]+).+
-                  with: $1
-            - map:
-                "badpuppy": BadPuppy
-                "clubamateurusa": ClubAmateurUSA
-# Last Updated March 24, 2024
+          fixed: BadPuppy
+driver:
+  headers:
+    - Key: X-NATS-cms-area-id
+      Value: 6f4ac1b5-6e47-47b2-96c7-b8e0af0fe41d
+    - Key: X-nats-entity-decode
+      Value: "1"

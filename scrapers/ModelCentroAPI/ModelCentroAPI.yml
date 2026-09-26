@@ -7,7 +7,6 @@ sceneByURL:
       - amberlilyshow.com/scene/
       - amberspanks.com/scene/
       - americankitten.com/scene/
-      - amirahadaraxxx.com/scene/
       - anastasiagree.com/scene/
       - anisyia.xxx/scene/
       - arabellesplayground.com/scene/
@@ -15,13 +14,11 @@ sceneByURL:
       - aussiexxxhookups.com/scene/
       - bhalasada.com/scene/
       - bigjohnnyxxx.com/scene/
-      - blondehexe.net/scene/
       - bohonude.art/scene/
       - brandonlh.com/scene/
       - brianaleecams.com/scene/
       - brookelynnebriar.com/scene/
       - carlhubaygay.xxx/scene/
-      - cartoons4grownfolks.com/scene/
       - claradeemembers.com/scene/
       - clubmaseratixxx.com/scene
       - cospimps.com/scene/
@@ -36,7 +33,7 @@ sceneByURL:
       - euroslut.club/scene/
       - facialcasting.com/scene/
       - fallinlovia.com/scene/
-      - fallonfuckingwest.com/scene/
+      - francescomalcom.com/product/
       - getyourkneesdirty.com/scene/
       - ginagerson.xxx/scene/
       - hentacles.com/scene/
@@ -50,7 +47,6 @@ sceneByURL:
       - jerkoffwithme.com/scene/
       - jessieminxxx.com/scene/
       - kacytgirl.com/scene/
-      - katie71.com/scene/
       - katrinporto.com/scene/
       - kendrasinclaire.com/scene/
       - kinkyrubberworld.com/scene/
@@ -58,6 +54,7 @@ sceneByURL:
       - krisskiss.com/scene/
       - kyleenash.com/scene/
       - ladysublime.com/scene/
+      - lasublimexxx.com/scene/
       - lilcandy.com/scene/
       - lilumoon.com/scene/
       - lilychey.com/scene/
@@ -117,11 +114,10 @@ sceneByURL:
       - vinaskyxxx.com/scene/
       - womenwhosmoke.com/scene/
       - xtcpov.com/scene/
-      - xtremestudios.studio69swf.live/scene/
       - xxxotikangelzent.com/scene/
       - yourgoonspace.com/scene/
     action: script
     script:
       - python
       - ModelCentroAPI.py
-# Last Updated October 7, 2025
+      - scene-by-url

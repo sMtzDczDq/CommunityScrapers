@@ -1,0 +1,105 @@
+name: CzechAV
+# scrapes: Anna Loves Shemale, Creative Porn, Czech Amateurs, Czech Bang Bus, Czech Bitch, Czech Cabins, Czech Casting, Czech Couples, Czech Estrogenolit, Czech Experiment, Czech Fantasy, Czech First Video, Czech Gang Bang, Czech Garden Party, Czech Gay Amateurs, Czech Gay Casting, Czech Gay Couples, Czech Gay Fantasy, Czech Gay Massage, Czech Gay Solarium, Czech Harem, Czech Home Orgy, Czech Lesbians, Czech Massage, Czech Mega Swingers, Czech Orgasm, Czech Parties, Czech Pawn Shop, Czech Pool, Czech Sauna, Czech Snooper, Czech Solarium, Czech Spy, Czech Streets, Czech Supermodels, Czech Taxi, Czech Wife Swap, Gay Horror Porn, Horror Porn, Life Porn Stories, Monster Cock Gang, Movie Porn, Perverse Family, R51.com, Redneck John, Unreal Porn, Unusual People, X Virtual
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - annalovesshemale.com/
+      - creativeporn.com/
+      - czechamateurs.com/
+      - czechbangbus.com/
+      - czechbitch.com/
+      - czechcabins.com/
+      - czechcasting.com/
+      - czechcouples.com/
+      - czechestrogenolit.com/
+      - czechexperiment.com/
+      - czechfantasy.com/
+      - czechfirstvideo.com/
+      - czechgangbang.com/
+      - czechgardenparty.com/
+      - czechgayamateurs.com/
+      - czechgaycasting.com/
+      - czechgaycouples.com/
+      - czechgayfantasy.com/
+      - czechgaymassage.com/
+      - czechgaysolarium.com/
+      - czechharem.com/
+      - czechhomeorgy.com/
+      - czechlesbians.com/
+      - czechmassage.com/
+      - czechmegaswingers.com/
+      - czechorgasm.com/
+      - czechparties.com/
+      - czechpawnshop.com/
+      - czechpool.com/
+      - czechsauna.com/
+      - czechsnooper.com/
+      - czechsolarium.com/
+      - czechspy.com/
+      - czechstreets.com/
+      - czechsupermodels.com/
+      - czechtaxi.com/
+      - czechwifeswap.com/
+      - gayhorrorporn.com/
+      - horrorporn.com/
+      - lifepornstories.com/
+      - monstercockgang.com/
+      - movieporn.com/
+      - perversefamily.com/
+      - powerfetish.com/
+      - r51.com/
+      - redneckjohn.com/
+      - unusualpeople.com/
+      - unrealporn.com/
+      - xvirtual.com/
+    scraper: sceneScraper
+sceneByQueryFragment:
+  action: scrapeXPath
+  queryURL: "{url}"
+  scraper: sceneScraper
+xPathScrapers:
+  sceneScraper:
+    scene:
+      Title:
+        selector: //h1//*[not(@class='visually-hidden')]/text() | //h1[@class="nice-title"]
+        postProcess:
+          - replace:
+              # Remove the sitename prefix
+              - regex: ^[A-Z][a-z0-9.]*( [A-Z][a-z0-9.]*)* \d+:\s*
+                with: ""
+              # Remove the VR suffix
+              - regex: \s*in\s+180°$
+                with: ""
+      URLs: //link[@rel="canonical"]/@href
+      Code:
+        # "Czech Casting 7460:" -> 7460, but "Power Fetish 12 - PART 5:" needs
+        # the part too: episode alone collides across every part of an episode
+        selector: //h1/span[@class="visually-hidden"]
+        postProcess:
+          - javascript: |
+              var part = /(\d+)\s*-\s*PART\s*(\d+)/i.exec(value);
+              if (part) return part[1] + "-" + part[2];
+              var episode = /(\d+)/.exec(value);
+              return episode ? episode[1] : "";
+      Details:
+        selector: //div[contains(@class,"read-more ")]/div/p/text() | //div[@class="desc-text"]/p
+        concat: "\n\n"
+      Tags:
+        Name: //li[@class="tag ellipsis no-shrink"]/a/span/text() | //ul[@class="tags"]/li/a[@class="tag"]
+      Performers:
+        Name:
+          selector: (//p[span[contains(., "Featuring:")]])[1]/a
+          postProcess:
+            # names are rendered lowercase and capitalised with CSS
+            - javascript: |
+                return value.replace(/\b\w/g, function (c) { return c.toUpperCase() })
+      Studio:
+        Name: //meta[@property="og:site_name"]/@content | //img[contains(@class, "logo")]/@alt
+      Image: //media-player/@poster | //dl8-video/@poster
+      Date:
+        selector: //script[@type="application/ld+json"][1]
+        postProcess:
+          - replace:
+              - regex: .+(?:"uploadDate":\s*")([^T]+).+
+                with: $1
+          - parseDate: 2006-01-02

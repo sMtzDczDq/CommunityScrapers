@@ -1,0 +1,93 @@
+name: ThirdRockEnt
+# scrapes: Abbie Maley, Anal Amateur, AnalBBC, Analized, Bad Daddy POV, Bad Family POV, Bad Mommy POV, Broken Sluts, Cum Dumpster Teens, DTF Sluts, Full Porn Network, Girlfaction, James Deen, Pork Vendors, Porn Force, Public Sex Date, Slut Inspection, Slutty BBWs, Teasing and Pleasing, Teenage Anal Sluts, Teenage Tryouts, Twisted Visual, Your Mom Does Porn
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - abbiemaley.com/trailers/
+      - analamateur.com/trailers/
+      - analbbc.com/trailers/
+      - analized.com/trailers/
+      - baddaddypov.com/trailers/
+      - badmommypov.com/trailers/
+      - brokensluts.net/trailers/
+      - cumdumpsterteens.com/trailers/
+      - dtfsluts.com/trailers/
+      - girlfaction.com/trailers/
+      - jamesdeen.com/trailers/
+      - porkvendors.com/trailers/
+      - pornforce.com/trailers/
+      - publicsexdate.com/trailers/
+      - slutinspection.com/trailers/
+      - sluttybbws.com/trailers/
+      - teasingandpleasing.com/trailers/
+      - teenageanalsluts.com/trailers/
+      - teenagetryouts.com/trailers/
+      - twistedvisual.com/trailers/
+      - yourmomdoesporn.com/trailers/
+
+      # There is currently no known way to scrape the correct
+      # substudio when scraping from these network sites
+      - badfamilypov.com/trailers/
+      - fullpornnetwork.com/trailers/
+
+    scraper: sceneScraper
+xPathScrapers:
+  sceneScraper:
+    common:
+      $scene: //div[contains(@class, "video-content")]
+    scene:
+      Title: //h1[contains(@class, "trailer_title")]
+      Details: $scene//p[@id="description"]
+      Date:
+        selector: $scene//label[contains(.,"Date Added")]/following-sibling::text()
+        postProcess:
+          - parseDate: 2006-01-02
+      URLs: &url //meta[@property="og:url"]/@content
+      Performers:
+        Name: $scene//a[contains(@href, "/models/")]
+      Tags:
+        Name: $scene//a[contains(@href, "/porn-categories/")]
+      Image:
+        selector: //meta[@property="og:url"]/@content | //meta[@property="og:image"]/@content
+        concat: __SEP__
+        postProcess:
+          - replace:
+              # CDN links have expiration times, validation tokens and are usually downscaled:
+              # let's grab the original image from the site domain instead
+              # https://regex101.com/r/tnFllS
+              - regex: https://(?P<domain>[^/]+).+__SEP__https://([^/]+mjedge\.net)/(?P<path>[^?]+).+
+                with: https://$domain/$path
+              # If images have been resized we can get the full image instead, suffering no loss of quality (and maybe getting higher qualities!)
+              - regex: (:?-[1-4]x)?\.jpg$
+                with: "-full.jpg"
+      Studio:
+        Name:
+          selector: *url
+          postProcess:
+            - replace:
+                - regex: ^(?:https:\/\/[\w\.]*?)([^.]+)\.(?:com|net).*
+                  with: $1
+            - map:
+                abbiemaley: Abbie Maley
+                analamateur: Anal Amateur
+                analbbc: AnalBBC
+                analized: Analized
+                baddaddypov: Bad Daddy POV
+                badfamilypov: Bad Family POV
+                badmommypov: Bad Mommy POV
+                brokensluts: Broken Sluts
+                cumdumpsterteens: Cum Dumpster Teens
+                dtfsluts: DTF Sluts
+                fullpornnetwork: Full Porn Network
+                girlfaction: Girlfaction
+                jamesdeen: James Deen
+                porkvendors: Pork Vendors
+                pornforce: Porn Force
+                publicsexdate: Public Sex Date
+                slutinspection: Slut Inspection
+                sluttybbws: Slutty BBWs
+                teasingandpleasing: Teasing and Pleasing
+                teenageanalsluts: Teenage Anal Sluts
+                teenagetryouts: Teenage Tryouts
+                twistedvisual: Twisted Visual
+                yourmomdoesporn: Your Mom Does Porn

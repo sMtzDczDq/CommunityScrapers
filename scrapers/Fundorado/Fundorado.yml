@@ -1,0 +1,59 @@
+name: Fundorado
+# requires: py_common
+# scrapes: Defiled 18, FemDorado, Girls Got Cream, Julia Reaves, LezDorado, Orgasm Abuse, RF Studio, Rubber Empire, Sappho Films, TA Worship, Texas Bukkake, Tickle Abuse, Try Teens, White Teens Black Cocks
+sceneByURL:
+  - action: script
+    url:
+      - analcheckups.com/video/
+      - analyzedgirls.com/video/
+      - assteenmouth.com/video/
+      - bangteenpussy.com/video/
+      - brutalinvasion.com/video/
+      - cumaholicteens.com/video/
+      - defiled18.com/video/
+      - doubleteamedteens.com/video/
+      - dreamteenshd.com/video/
+      - drilledchicks.com/video/
+      - fabsluts.com/video/
+      - femdorado.com/video/
+      - fundorado.com/video/
+      - fundorado.de/video/
+      - girlsgotcream.com/video/
+      - hardcoreyouth.com/video/
+      - jerk-offpass.com/video/
+      - julia-reaves.com/video/
+      - lezdorado.com/video/
+      - littlehellcat.com/video/
+      - maketeengape.com/video/
+      - nightclub.eu/video/
+      - nylonspunkjunkies.com/video/
+      - nylonsweeties.com/video/
+      - orgasmabuse.com/video/
+      - rfmovies.com/video/
+      - rubber-empire.com/video/
+      - sapphofilms.com/video/
+      - seductive18.com/video/
+      - shegotsix.com/video/
+      - spearteenpussy.com/video/
+      - spermantino.com/video/
+      - taworship.com/video/
+      - teachmyass.com/video/
+      - teenanalcasting.com/video/
+      - teencoreclub.com/video/
+      - teencorezine.com/video/
+      - teendrillers.com/video/
+      - teensnaturalway.com/video/
+      - teenstryblacks.com/video/
+      - texasbukkake.com/video/
+      - tickleabuse.com/video/
+      - tryteens.com/video/
+      - vodeu.com/video/
+      - weneednewtalents.com/video/
+      - whiteteensblackcocks.com/video/
+      - xcoreclub.com/video/
+      - youngthroats.com/video/
+    script:
+      - python
+      - Fundorado.py
+      - scene-by-url
+# Last Updated August 30, 2026

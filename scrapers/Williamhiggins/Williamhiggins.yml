@@ -1,0 +1,16 @@
+# requires: py_common
+name: William Higgins
+# scrapes: Ambush Massage, CFNM EU, MaleFeet4U, Str8 Hell, SWNude, William Higgins
+sceneByURL:
+  - action: script
+    url:
+      - ambushmassage.com
+      - cfnmeu.com
+      - malefeet4u.com
+      - str8hell.com
+      - swnude.com
+      - williamhiggins.com
+    script:
+      - python
+      - Williamhiggins.py
+      - scene-by-url

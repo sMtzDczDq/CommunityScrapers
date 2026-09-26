@@ -4,21 +4,27 @@ sceneByURL:
     url:
       - akiralane.com/tour/
       - akiralanebound.com/tour/
+      - nikkiphoenixxx.com/tour/
       - pantyhoselane.com/tour/
     scraper: sceneScraper
 xPathScrapers:
   sceneScraper:
     scene:
-      Title:
-        selector: //h1
+      Title: //h1
       Details: //div[@class="videocontent"]/p
       Image:
-        selector: //base/@href | //script[contains(.,'poster')]
+        selector: >-
+          //base/@href | //script[contains(., "poster")] |
+          //img[contains(@class, "update_thumb thumbs stdimage")][not(//script[contains(., "poster")])]/@src0_1x
         concat: __SEP__
         postProcess:
           - replace:
-              - regex: ^.*(https://[^/]+).+src0_.x="([^"]+).+
-                with: $1$2
+              - regex: .*/$
+                with: ""
+              - regex: ^.*(https://[^/]+).+src0_1x="([^"]+)-1x\.jpg".+
+                with: ${1}${2}-full.jpg
+              - regex: ^(https?://[^/]+)[^_]*__SEP__(/.+?)(?:-1x)?\.jpg$
+                with: ${1}${2}-full.jpg
       Date:
         selector: //div[@class="videodetails"]/p[@class="date"]
         postProcess:
@@ -27,10 +33,11 @@ xPathScrapers:
                 with: $1
           - parseDate: 01/02/2006
       Tags:
-        Name: //div[@class="videodetails"]//a[contains(@href,"categories")]/text()
+        Name: //div[@class="videodetails"]//a[contains(@href,"categories")]
       Performers:
         Name:
-          selector: //p[@class="modelname"]/comment()
+          selector: //span[@class="tour_update_models"]/a | //p[@class="modelname"]/comment()
+          concat: "|"
           postProcess:
             - replace:
                 # Try to extract model names from comment
@@ -51,5 +58,5 @@ xPathScrapers:
             - map:
                 akiralane: Akira Lane
                 akiralanebound: Akira Lane Bound
+                nikkiphoenixxx: Nikki Phoenix Official Site
                 pantyhoselane: Pantyhose Lane
-# Last Updated April 1, 2024

@@ -1,4 +1,3 @@
-# yaml-language-server: $schema=../../validator/scraper.schema.json
 name: Arx
 sceneByURL:
   - action: scrapeXPath
@@ -27,61 +26,48 @@ performerByURL:
 xPathScrapers:
   htmlScraper:
     scene:
-      Title: &titleSel //meta[@property="og:title"]/@content
+      # meta og:title is sometimes different to the actual title
+      Title: //img[@class="vds-poster"]/@alt
       Date: &date
-        selector: //h1/following-sibling::div[contains(@class, "items-center")]//span[@class="block"]/text()
+        selector: //h1/following-sibling::div[contains(@class, "items-center")]//span[@class="block"]
         postProcess:
           - parseDate: Jan 2, 2006
       Details: &detailsSel //span[text()="Description:"]/following-sibling::span
       Performers:
-        Name: &performersSel //span[text()="Models:"]/following-sibling::div//a//span/text()
+        Name: &performersSel //span[text()="Models:"]/following-sibling::div//a//span
       Tags:
-        Name: &tagsSel //a[contains(@href, "/categories/")]//text()
-      URL: &urlSel //meta[@property="og:url"]/@content
+        Name: &tagsSel //a[contains(@href, "/categories/")]
+      URLs: &urlSel //meta[@property="og:url"]/@content
       Image: &imageSel //meta[@property="og:image"]/@content
       Code: &code
-        selector: *urlSel
+        selector: *imageSel
         postProcess:
-          - replace:
-              - regex: &domainAndCodeRegex 'https?://([^/]+)/scenes/(\d+)/.*'
-                with: $2
+          - javascript: |
+              const m = /\/scene_thumbs\/(.+?)-\d+x\d+-thumb\./.exec(value);
+              return m ? m[1] : "";
       Studio:
         Name: &studioName
-          selector: *imageSel
+          selector: //img[contains(@alt, "Logo") and not(contains(@alt, "Randy Pass"))]/@alt
           postProcess:
             - replace:
-                - regex: '.*/scene_thumbs/([^\d]+).*'
-                  with: $1
-            - map:
-                hhdp: Anal Vault
-                chi: Cuck Hunter
-                hhsf: Honey Trans
-                hhsm: Honey Trans
-                hhsss: Honey Trans
-                jlo: Japan Lust
-                jly: Japan Lust
-                joi: JOI Babes
-                hhles: Les Worship
-                yoga: Nude Yoga Porn
-                pov: POV Masters
-                tsdl: Trans Daylight
-                tstm: Trans Midnight
-                tsrm: Trans Roommates
-        URL:
-          selector: *urlSel
+                - regex: \s*Logo
+                  with: ""
+        URLs:
+          selector: //meta[@property="og:url"][not(contains(@content, "randypass.com"))]/@content
           postProcess:
             - replace:
-                - regex: *domainAndCodeRegex
-                  with: https://www.$1
+                - regex: 'https?://([^/]+)/scenes/\d+/.*'
+                  with: https://$1
     gallery:
       Title:
-        selector: *titleSel
+        # meta og:title is sometimes different to "Photos from <the actual title>"
+        selector: //div[contains(@class, "grid")]//img/@alt
         postProcess:
           - replace:
-              - regex: "Photos for Scene \\| "
+              - regex: "- Photo \\d+"
                 with: ""
       Code: *code
-      URL: *urlSel
+      URLs: *urlSel
       Date:
         selector: *urlSel
         postProcess:
@@ -120,7 +106,7 @@ xPathScrapers:
           - subScraper: *detailsSel
     performer:
       Name: //meta[@property="og:image:alt"]/@content
-      Image:
+      Images:
         selector: *imageSel
         postProcess:
           - replace:
@@ -128,4 +114,4 @@ xPathScrapers:
                 with: "${1}0x0${2}"
       Tags:
         Name: *tagsSel
-# Last Updated November 7, 2025
+# Last Updated September 22, 2026

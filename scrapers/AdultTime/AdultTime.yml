@@ -1,6 +1,6 @@
-# yaml-language-server: $schema=../../validator/scraper.schema.json
-# requires: AlgoliaAPI
+# requires: Altwolia
 name: "AdultTime"
+# scrapes: 21 Erotic Anal, 65 Inch Huge Asses, Agent Red Girl, All Girl Massage, Anal Teen Angels, ASMR Fantasy, Black White Fuck Fest, Blow Me POV, Brand New Faces, Bushy Bushy, Caught Fapping, Cumshot Oasis, Devil's Film, Devil's Tgirls, DP Fanatics, Femboyish, Footsie Babes, Girlfriends Films, Girls Try Anal, Girls Under Arrest, Girls Who Fuck Girls, Girlsway, Granny Ghetto, Hentai Sex School, HeteroFlexible, J.O.I Mom, JoyMii, Kiss Me / Fuck Me, Lady Gonzo, Lez Cuties, Massage Parlor, Milking Table, MixedX, Model Time, Modern-Day Sins, Mom is a Milf, Mommy's Boy, Mommy's Girl, Mother Fucker XXX, My Teen Oasis, Nasty Step Family, Nude Fight Club, Nuru Massage, Old Young Lesbian Love, Oopsie!, Orgy Train, Out Of The Family, Peter North, Petited, Pretty Dirty, Pure Taboo, Soapy Massage, Squirtalicious, Super Horny Fun Time, Transfixed, Transsexual Roadtrip, Tricky Spa, True Lesbian, Vivid, Vivid Classic, Web Young
 sceneByURL:
   - action: script
     url:
@@ -8,20 +8,22 @@ sceneByURL:
       - 21sextreme.com/en/video/
       - 21sextury.com/en/video/
       - accidentalgangbang.com/en/video/
-      - adamandevepictures.com/en/video/
       - adulttime.com/en/video/
       - adulttimepilots.com/en/video/
       - agentredgirl.com/en/video/
       - ageandbeauty.com/en/video/
+      - alettaoceanempire.com/en/video/
       - allgirlmassage.com/en/video/
       - analteenangels.com/en/video/
       - asmrfantasy.com/en/video/
       - assholefever.com/en/video/
-      - beingtrans247.com/en/video/
+      - bigfatcreampie.com/en/video/
       - blowmepov.com/en/video/
-      - burningangel.com/en/video/
+      - bushybushy.com/en/video/
       - caughtfapping.com/en/video/
       - coupleswapping.com/en/video/
+      - cumshotoasis.com/en/video/
+      - currycreampie.com/en/video/
       - devilsfilm.com/en/video/
       - devilsfilmparodies.com/en/video/
       - devilsgangbangs.com/en/video/
@@ -42,6 +44,7 @@ sceneByURL:
       - girlsway.com/en/video/
       - givemeteens.com/en/video/
       - gostuckyourself.com/en/video/
+      - grannyghetto.com/en/video/
       - hairyundies.com/en/video/
       - hentaisexschool.com/en/video/
       - heteroflexible.com/en/video/
@@ -56,37 +59,53 @@ sceneByURL:
       - lezbebad.com/en/video/
       - lezcuties.com/en/video/
       - massage-parlor.com/en/video/
+      - members.adulttime.com/en/video/
       - milkingtable.com/en/video/
       - mixedx.com/en/video/
       - modeltime.com/en/video/
       - moderndaysins.com/en/video/
       - mommysboy.com/en/video/
       - mommysgirl.com/en/video/
+      - motherfuckerxxx.com/
       - muses.com/en/video/
+      - myteenoasis.com/
       - nudefightclub.com/en/video/
       - nurumassage.com/en/video/
-      - officemsconduct.com/en/video/
       - oopsie.com/en/video/
       - oopsieanimated.com/en/video/
       - outofthefamily.com/en/video/
       - peternorth.com/en/video/
       - povmassage.com/en/video/
+      - povthis.com/en/video/
       - prettydirty.com/en/video/
       - puretaboo.com/en/video/
       - sabiendemonia.com/en/video/
       - shewantshim.com/en/video/
+      - silverstonedvd.com/
+      - silviasaint.com/en/video/
       - sistertrick.com/en/video/
       - soapymassage.com/en/video/
+      - squirtalicious.com/en/video/
+      - squirtinglesbian.com/en/video/
       - superhornyfuntime.com/en/video/
       - teensneaks.com/en/video/
       - thebrats.com/en/video/
-      - theyeslist.com/en/video/
       - toywithme.com/en/video/
       - transfixed.com/en/video/
       - transgressivefilms.com/en/video/
+      - transsexualroadtrip.com/en/video/
       - trickyspa.com/en/video/
       - truelesbian.com/en/video/
       - vivid.com/en/video/
+      - 65inchhugeasses.com/en/video/
+      - blackwhitefuckfest.com/en/video/
+      - brandnewfaces.com/en/video/
+      - girlswhofuckgirls.com/en/video/
+      - momisamilf.com/en/video/
+      - nastystepfamily.com/en/video/
+      - orgytrain.com/en/video/
+      - petited.com/en/video/
+      - vividclassic.com/en/video/
       - webyoung.com/en/video/
       - welikegirls.com/en/video/
       - wheretheboysarent.com/en/video/
@@ -96,35 +115,30 @@ sceneByURL:
     script:
       - python
       - AdultTime.py
-      - girlsway
       - scene-by-url
 sceneByFragment:
   action: script
   script:
     - python
     - AdultTime.py
-    - girlsway
     - scene-by-fragment
 sceneByName:
   action: script
   script:
     - python
     - AdultTime.py
-    - girlsway
     - scene-by-name
 sceneByQueryFragment:
   action: script
   script:
     - python
     - AdultTime.py
-    - girlsway
     - scene-by-query-fragment
 galleryByFragment:
   action: script
   script:
     - python
     - AdultTime.py
-    - puretaboo
     - gallery-by-fragment
 galleryByURL:
   - action: script
@@ -141,6 +155,7 @@ galleryByURL:
       - fantasymassage.com/en/photo/
       - girlsway.com/en/photo/
       - joymii.com/en/photo/
+      - members.adulttime.com/en/photo/
       - mommysgirl.com/en/photo/
       - nurumassage.com/en/photo/
       - oopsie.com/en/photo/
@@ -154,7 +169,6 @@ galleryByURL:
     script:
       - python
       - AdultTime.py
-      - puretaboo
       - gallery-by-url
 groupByURL:
   - action: script
@@ -162,17 +176,16 @@ groupByURL:
       - adulttime.com/en/dvd/
       - devilsfilm.com/en/dvd/
       - devilstgirls.com/en/dvd/
+      - members.adulttime.com/en/movie/
       - outofthefamily.com/en/dvd/
     script:
       - python
       - AdultTime.py
-      - puretaboo
       - movie-by-url
 performerByURL:
   - action: script
     url:
       - accidentalgangbang.com/en/pornstar/
-      - adamandevepictures.com/en/pornstar/
       - adulttime.com/en/pornstar/
       - adulttimepilots.com/en/pornstar/
       - agentredgirl.com/en/pornstar/
@@ -180,7 +193,6 @@ performerByURL:
       - analteenangels.com/en/pornstar/
       - asmrfantasy.com/en/pornstar/
       - assholefever.com/en/pornstar/
-      - beingtrans247.com/en/pornstar/
       - blowmepov.com/en/pornstar/
       - caughtfapping.com/en/pornstar/
       - devilsfilm.com/en/pornstar/
@@ -201,6 +213,7 @@ performerByURL:
       - lezbebad.com/en/pornstar/
       - lezcuties.com/en/pornstar/
       - massage-parlor.com/en/pornstar/
+      - members.adulttime.com/en/pornstar/
       - milkingtable.com/en/pornstar/
       - mixedx.com/en/pornstar/
       - modeltime.com/en/pornstar/
@@ -210,7 +223,6 @@ performerByURL:
       - muses.com/en/pornstar/
       - nudefightclub.com/en/pornstar/
       - nurumassage.com/en/pornstar/
-      - officemsconduct.com/en/pornstar/
       - oopsie.com/en/pornstar/
       - outofthefamily.com/en/pornstar/
       - peternorth.com/en/pornstar/
@@ -219,12 +231,20 @@ performerByURL:
       - sabiendemonia.com/en/pornstar/
       - soapymassage.com/en/pornstar/
       - teensneaks.com/en/pornstar/
-      - theyeslist.com/en/pornstar/
       - transfixed.com/en/pornstar/
       - transgressivefilms.com/en/pornstar/
       - trickyspa.com/en/pornstar/
       - truelesbian.com/en/pornstar/
       - vivid.com/en/pornstar/
+      - 65inchhugeasses.com/en/pornstar/
+      - blackwhitefuckfest.com/en/pornstar/
+      - brandnewfaces.com/en/pornstar/
+      - girlswhofuckgirls.com/en/pornstar/
+      - momisamilf.com/en/pornstar/
+      - nastystepfamily.com/en/pornstar/
+      - orgytrain.com/en/pornstar/
+      - petited.com/en/pornstar/
+      - vividclassic.com/en/pornstar/
       - webyoung.com/en/pornstar/
       - welikegirls.com/en/pornstar/
       - wolfwagner.com/en/pornstar/
@@ -239,13 +259,10 @@ performerByName:
   script:
     - python
     - AdultTime.py
-    - girlsway
     - performer-by-name
 performerByFragment:
   action: script
   script:
     - python
     - AdultTime.py
-    - girlsway
     - performer-by-fragment
-# Last Updated May 18, 2026

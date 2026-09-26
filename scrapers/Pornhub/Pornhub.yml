@@ -25,9 +25,11 @@ sceneByFragment:
   scraper: sceneScraper
 
 sceneByName:
-  action: scrapeXPath
-  queryURL: https://www.pornhub.com/video/search?search={}
-  scraper: sceneSearch
+  action: script
+  script:
+    - python3
+    - Pornhub.py
+    - scene-by-name
 sceneByQueryFragment:
   action: scrapeXPath
   queryURL: "{url}"
@@ -37,26 +39,10 @@ performerByName:
   action: script
   script:
     - python3
-    - PornhubStar.py
+    - Pornhub.py
     - performer-by-name
 
 xPathScrapers:
-  sceneSearch:
-    common:
-      $searchItem: //ul[contains(@class, "search-video-thumbs") and not(@id="bottomVideos")]
-      $searchThumb: //ul[contains(@class, "search-video-thumbs") and not(@id="bottomVideos")]//div[contains(@class, "thumbnail-info-wrapper")]
-
-    scene:
-      Title: $searchThumb//span[@class="title"]/a
-      URL:
-        selector: $searchThumb//span[@class="title"]/a/@href
-        postProcess:
-          - replace:
-              - regex: ^
-                with: "https://www.pornhub.com"
-      Image: $searchItem//div[contains(@class, "phimage")]//img/@data-mediumthumb
-      Studio:
-        Name: $searchThumb//div[contains(@class, "usernameWrap")]/a[matches(@href, "/(channels|model|pornstar)/")]
   performerScraper:
     common:
       $infoPiece: //div[@class="infoPiece"]
@@ -85,8 +71,6 @@ xPathScrapers:
           - map:
               Trans Man: transgender_male
               Trans Woman: transgender_female
-      Twitter: //ul[contains(@class,"socialList")]//a[contains(@href,"twitter.com/")]/@href
-      Instagram: //ul[contains(@class,"socialList")]//a[contains(@href,"instagram.com/")]/@href
       Measurements: $infoPiece[contains(span,"Measurements:")]/$smallInfo|$infoPiece[contains(span,"Measurements:")]/text()
       Weight:
         selector: $infoPiece[contains(span,"Weight:")]/$smallInfo|$infoPiece[contains(span,"Weight:")]/text()
@@ -106,14 +90,30 @@ xPathScrapers:
       Piercings: $infoPiece[contains(span,"Piercings:")]/$smallInfo
       Tattoos: $infoPiece[contains(span,"Tattoos:")]/$smallInfo
       HairColor: $infoPiece[contains(span,"Hair Color:")]/$smallInfo
-      CareerLength:
+      CareerStart:
         selector: $infoPiece[contains(span,"Career Start and End:")]/$smallInfo
         postProcess:
           - replace:
               - regex: \s+to\s+
                 with: "-"
-      URLs: //link[@rel="canonical"][1]/@href
-      Image: //div[@class="thumbImage"]/img/@src|//img[@id="getAvatar"]/@src
+          - javascript: |
+              const m = value.match(/\d{4}/);
+              return m ? m[0] : "";
+      CareerEnd:
+        selector: $infoPiece[contains(span,"Career Start and End:")]/$smallInfo
+        postProcess:
+          - replace:
+              - regex: \s+to\s+
+                with: "-"
+          - javascript: |
+              // only a real second year counts as an end - "Present"/"-" mean ongoing
+              const years = value.match(/\d{4}/g) || [];
+              return years.length > 1 ? years[years.length - 1] : "";
+      URLs: >
+        //link[@rel="canonical"][1]/@href
+        | //ul[contains(@class,"socialList")]//a[contains(@href,"instagram.com/")]/@href
+        | //ul[contains(@class,"socialList")]//a[contains(@href,"twitter.com/")]/@href
+      Images: //div[@class="thumbImage"]/img/@src|//img[@id="getAvatar"]/@src
   sceneScraper:
     common:
       $datablob: //script[contains(., 'VideoObject')]/text()
@@ -138,7 +138,7 @@ xPathScrapers:
               # this will make it return an empty result instead of an erroneous title
               - regex: ^Recently Featured Porn Videos$
                 with: ""
-      URL: //meta[@property="og:url"]/@content
+      URLs: //meta[@property="og:url"]/@content
       Date:
         selector: $dataLayer
         postProcess:
@@ -168,4 +168,3 @@ driver:
           Domain: ".pornhub.com"
           Value: "1"
           Path: "/"
-# Last Updated September 26, 2026

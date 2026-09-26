@@ -1,0 +1,56 @@
+name: HouseholdFantasy
+
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - householdfantasy.com/
+    scraper: sceneScraper
+
+sceneByName:
+  action: scrapeXPath
+  queryURL: https://householdfantasy.com/?s={}
+  scraper: sceneSearch
+
+sceneByQueryFragment:
+  action: scrapeXPath
+  queryURL: "{url}"
+  scraper: sceneScraper
+
+xPathScrapers:
+  sceneSearch:
+    common:
+      $card: //article[contains(@class, "elementor-post") and contains(@class, "type-post")]
+    scene:
+      Title: $card//h3[contains(@class, "elementor-post__title")]/a
+      URLs: $card//h3[contains(@class, "elementor-post__title")]/a/@href
+      Date:
+        selector: $card//span[contains(@class, "elementor-post-date")]
+        postProcess:
+          - parseDate: January 2, 2006
+      Image: $card//div[contains(@class, "elementor-post__thumbnail")]/img/@src
+      Details: $card//div[contains(@class, "elementor-post__excerpt")]/p
+
+  sceneScraper:
+    common:
+      $scene: //body[contains(@class, "single-post")]
+    scene:
+      Title: $scene//h1[contains(@class, "elementor-heading-title")]
+      Date:
+        selector: //meta[@property="article:published_time"][$scene]/@content
+        postProcess:
+          - parseDate: 2006-01-02T15:04:05Z07:00
+      Details:
+        selector: $scene//div[contains(@class, "elementor-widget-theme-post-content")]//p[normalize-space()]
+        concat: "\n\n"
+      Image: //meta[@property="og:image"][$scene]/@content
+      Performers:
+        Name: $scene//a[contains(@href, "/tag/")]
+      Tags:
+        Name: $scene//a[contains(@href, "/category/")]
+      Studio:
+        Name:
+          selector: $scene/@class
+          postProcess:
+            - replace:
+                - regex: .+
+                  with: Household Fantasy

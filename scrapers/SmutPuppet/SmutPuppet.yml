@@ -1,0 +1,123 @@
+name: SmutPuppet
+sceneByURL:
+  - action: scrapeXPath
+    url:
+      - porngutter.com/update
+      # All of these redirect to porngutter.com
+      # and so they need trickery to get correct
+      # dates and studio names
+      - 3wayfuck.com/update
+      - blackandbig.com/update
+      - blondeslovedick.com/update
+      - brunetteslovedick.com/update
+      - cougarkingdom.com/update
+      - darksodomy.com/update
+      - eurosex4k.com/update
+      - grannyvsbbc.com/update
+      - groupfucksite.com/update
+      - maturefucksteen.com/update
+      - milfsodomy.com/update
+      - porn-uk.com/update
+      - smutmerchants.com/update
+      - teamfucksgirl.com/update
+      - teenerotica.xxx/update
+    scraper: networkScraper
+  - action: scrapeXPath
+    url:
+      # Subsites that render their own update date
+      - hcjav.com/update
+      - jeffsmodels.com/update
+    scraper: subSiteScraper
+  - action: scrapeXPath
+    url:
+      # These subsites don't render their own update date, but they do share
+      # porngutter.com's update ids, so it can be read off the network page
+      - dothewife.com/update
+      - genlez.com/update
+      - goldenslut.com/update
+      - suggabunny.com/update
+    scraper: subSiteScraperNoDate
+xPathScrapers:
+  networkScraper:
+    scene:
+      Title: &title //div[@class="section-title"]
+      # the update id is a real identifier here, not an incidental URL id:
+      # the sequence is gapless and has survived the site's layout changes
+      Code: &code
+        selector: &URL //link[@rel="canonical"]/@href
+        postProcess:
+          - replace:
+              - regex: .+\/update\/0*(\d+).+
+                with: $1
+      Date: &date
+        selector: //small[@class="updated-at"]
+        postProcess:
+          - parseDate: Jan 2, 2006
+      # Use search to get the correct substudio
+      Studio:
+        Name:
+          selector: *title
+          postProcess:
+            - replace:
+                - regex: '\s'
+                  with: "+"
+                - regex: "&"
+                  with: "%26"
+                - regex: ^
+                  with: https://porngutter.com/updates/?step=2&show_bonus_sites=1&q=
+            - subScraper:
+                selector: //a[@class="quick-tag"]
+            - replace:
+                - regex: \s\(18\+\)$
+                  with: ""
+      Performers: &performers
+        Name: //div[@class="model-rich"]/h4[@class="theme-color"]/a
+      Tags: &tags
+        Name: //div[@class="model-categories"]/a
+      Details: &details
+        selector: //p[@class="read-more"]
+        postProcess:
+          - replace:
+              - regex: '^\s*:\s*'
+                with: ""
+      URLs: *URL
+      Image: &image
+        selector: //img[@class="video-banner"]/@src | //video/@poster
+        postProcess:
+          - replace:
+              # updates with no cover render the literal string "None"
+              - regex: ^None$
+                with: ""
+              - regex: ^/
+                with: https://porngutter.com
+  subSiteScraper:
+    scene:
+      Title: *title
+      Code: *code
+      Date: *date
+      Studio: &subSiteStudio
+        Name: //img[contains(@src, "logo.png")]/@alt
+      Performers: *performers
+      Tags: *tags
+      Details: *details
+      URLs: *URL
+      Image: *image
+  subSiteScraperNoDate:
+    scene:
+      Title: *title
+      Code: *code
+      Date:
+        selector: *URL
+        postProcess:
+          - replace:
+              - regex: .+\/update\/0*(\d+).+
+                with: https://porngutter.com/update/$1/
+          - subScraper:
+              selector: //small[@class="updated-at"]
+          - parseDate: Jan 2, 2006
+      Studio: *subSiteStudio
+      Performers: *performers
+      Tags: *tags
+      Details: *details
+      URLs: *URL
+      Image: *image
